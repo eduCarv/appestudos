@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">AppEstudos</string>
+
+    <string name="titulo_cadastro">Cadastro de Certificação</string>
+    <string name="subtitulo_cadastro">Registre uma certificação que deseja estudar</string>
+
+    <string name="label_nome">Nome da certificação *</string>
+    <string name="hint_nome">Ex.: Oracle Java Foundations</string>
+
+    <string name="label_instituicao">Instituição responsável *</string>
+    <string name="hint_instituicao">Ex.: Oracle</string>
+
+    <string name="label_area">Área de conhecimento</string>
+
+    <string name="label_situacao">Situação da certificação *</string>
+    <string name="situacao_planejada">Planejada</string>
+    <string name="situacao_andamento">Em andamento</string>
+    <string name="situacao_concluida">Concluída</string>
+
+    <string name="possui_prova">Possui prova agendada</string>
+
+    <string name="botao_limpar">Limpar</string>
+    <string name="botao_salvar">Salvar</string>
+</resources>
+
