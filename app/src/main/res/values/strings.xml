@@ -21,5 +21,72 @@
 
     <string name="botao_limpar">Limpar</string>
     <string name="botao_salvar">Salvar</string>
+
+    <!-- Dados temporários das certificações -->
+
+    <string-array name="certificacao_ids">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="certificacao_nomes">
+        <item>Oracle Java Foundations</item>
+        <item>Java SE 17 Developer</item>
+        <item>AWS Cloud Practitioner</item>
+        <item>Microsoft Azure Fundamentals</item>
+        <item>Google Cloud Digital Leader</item>
+        <item>CompTIA Security+</item>
+        <item>Oracle Database SQL</item>
+        <item>Linux Essentials</item>
+        <item>Scrum Foundation Professional</item>
+        <item>Python Programming Certification</item>
+    </string-array>
+
+    <string-array name="certificacao_instituicoes">
+        <item>Oracle</item>
+        <item>Oracle</item>
+        <item>Amazon Web Services</item>
+        <item>Microsoft</item>
+        <item>Google Cloud</item>
+        <item>CompTIA</item>
+        <item>Oracle</item>
+        <item>Linux Professional Institute</item>
+        <item>CertiProf</item>
+        <item>Python Institute</item>
+    </string-array>
+
+    <string-array name="certificacao_areas">
+        <item>Desenvolvimento de Software</item>
+        <item>Desenvolvimento de Software</item>
+        <item>Computação em Nuvem</item>
+        <item>Computação em Nuvem</item>
+        <item>Computação em Nuvem</item>
+        <item>Segurança da Informação</item>
+        <item>Banco de Dados</item>
+        <item>Redes de Computadores</item>
+        <item>Gestão de Projetos</item>
+        <item>Desenvolvimento de Software</item>
+    </string-array>
+
+    <string-array name="certificacao_situacoes">
+        <item>Concluída</item>
+        <item>Em andamento</item>
+        <item>Planejada</item>
+        <item>Planejada</item>
+        <item>Em andamento</item>
+        <item>Planejada</item>
+        <item>Concluída</item>
+        <item>Em andamento</item>
+        <item>Planejada</item>
+        <item>Em andamento</item>
+    </string-array>
 </resources>
 
