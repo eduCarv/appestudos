@@ -1,5 +1,6 @@
 package br.github.educarv.appestudos;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -184,20 +185,16 @@ public class MainActivity extends AppCompatActivity {
             provaAgendada = "Não";
         }
 
-        String mensagem =
-                "Certificação válida: "
-                        + nome
-                        + " | Área: "
-                        + areaSelecionada
-                        + " | Situação: "
-                        + situacaoSelecionada
-                        + " | Prova: "
-                        + provaAgendada;
+        Intent intentResultado = new Intent();
 
-        Toast.makeText(
-                this,
-                mensagem,
-                Toast.LENGTH_LONG
-        ).show();
+        intentResultado.putExtra("nome", nome);
+        intentResultado.putExtra("instituicao", instituicao);
+        intentResultado.putExtra("area", areaSelecionada);
+        intentResultado.putExtra("situacao", situacaoSelecionada);
+        intentResultado.putExtra("prova", provaAgendada);
+
+        setResult(RESULT_OK, intentResultado);
+
+        finish();
     }
 }
