@@ -16,8 +16,8 @@ public class CertificacoesActivity extends AppCompatActivity {
 
     private ArrayList<Certificacao> certificacoes;
 
-    private Button buttonAdicionar;
-    private Button buttonSobre;
+   // private Button buttonAdicionar;
+   // private Button buttonSobre;
 
     private static final int REQUEST_CADASTRO = 1;
     private CertificacaoAdapter adapter;
@@ -57,6 +57,7 @@ public class CertificacoesActivity extends AppCompatActivity {
                 }
         );
 
+        /**
         buttonAdicionar =
                 findViewById(R.id.buttonAdicionar);
 
@@ -88,7 +89,9 @@ public class CertificacoesActivity extends AppCompatActivity {
             //executa a açao
             startActivity(intent);
         });
+         */
     }
+
 
     private void carregarCertificacoes() {
 
