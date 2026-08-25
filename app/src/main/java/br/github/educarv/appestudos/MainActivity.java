@@ -23,9 +23,6 @@
         private Spinner spinnerArea;
         private RadioGroup radioGroupSituacao;
         private CheckBox checkBoxProvaAgendada;
-        private Button buttonLimpar;
-        private Button buttonSalvar;
-
         private boolean modoEdicao = false;
         private int idEdicao = -1;
         private int posicaoEdicao = -1;
@@ -42,7 +39,6 @@
             configurarBarrasDoSistema();
             inicializarComponentes();
             configurarSpinner();
-            configurarBotoes();
             verificarModoEdicao();
         }
 
@@ -153,8 +149,6 @@
             spinnerArea = findViewById(R.id.spinnerArea);
             radioGroupSituacao = findViewById(R.id.radioGroupSituacao);
             checkBoxProvaAgendada = findViewById(R.id.checkBoxProvaAgendada);
-            buttonLimpar = findViewById(R.id.buttonLimpar);
-            buttonSalvar = findViewById(R.id.buttonSalvar);
             radioButtonPlanejada = findViewById(R.id.radioButtonPlanejada);
             radioButtonAndamento = findViewById(R.id.radioButtonAndamento);
             radioButtonConcluida = findViewById(R.id.radioButtonConcluida);
@@ -183,11 +177,6 @@
             );
 
             spinnerArea.setAdapter(adapter);
-        }
-
-        private void configurarBotoes() {
-            buttonLimpar.setOnClickListener(view -> limparFormulario());
-            buttonSalvar.setOnClickListener(view -> salvarCertificacao());
         }
 
         private void limparFormulario() {
