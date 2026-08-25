@@ -37,4 +37,20 @@ public class Certificacao {
     public String getSituacao() {
         return situacao;
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setInstituicao(String instituicao) {
+        this.instituicao = instituicao;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
 }

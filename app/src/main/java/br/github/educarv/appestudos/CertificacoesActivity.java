@@ -1,90 +1,199 @@
-package br.github.educarv.appestudos;
+    package br.github.educarv.appestudos;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
+    import android.content.Intent;
+    import android.os.Bundle;
+    import android.view.ContextMenu;
+    import android.view.Menu;
+    import android.view.MenuItem;
+    import android.view.View;
+    import android.widget.AdapterView;
+    import android.widget.ListView;
+    import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+    import androidx.annotation.NonNull;
+    import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+    import java.util.ArrayList;
 
-public class CertificacoesActivity extends AppCompatActivity {
+    public class CertificacoesActivity extends AppCompatActivity {
 
-    private ListView listViewCertificacoes;
+        private ListView listViewCertificacoes;
 
-    private ArrayList<Certificacao> certificacoes;
-    private int posicaoSelecionada = -1;
+        private ArrayList<Certificacao> certificacoes;
+        private int posicaoSelecionada = -1;
 
-    private static final int REQUEST_CADASTRO = 1;
-    private CertificacaoAdapter adapter;
+        private static final int REQUEST_CADASTRO = 1;
+        private CertificacaoAdapter adapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_certificacoes);
+            setContentView(R.layout.activity_certificacoes);
 
-        listViewCertificacoes =
-                findViewById(R.id.listViewCertificacoes);
-        registerForContextMenu(listViewCertificacoes);
+            listViewCertificacoes =
+                    findViewById(R.id.listViewCertificacoes);
+            registerForContextMenu(listViewCertificacoes);
 
-        certificacoes = new ArrayList<>();
+            certificacoes = new ArrayList<>();
 
-        adapter =
-                new CertificacaoAdapter(
-                        this,
-                        certificacoes
+            adapter =
+                    new CertificacaoAdapter(
+                            this,
+                            certificacoes
+                    );
+
+            listViewCertificacoes.setAdapter(adapter);
+
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu,View view,ContextMenu.ContextMenuInfo menuInfo) {
+            super.onCreateContextMenu(menu,view,menuInfo);
+            getMenuInflater().inflate(R.menu.menu_certificacoes_item_selecionado,menu);
+            menu.setHeaderTitle("Opções da certificação");
+        }
+
+        @Override
+        public boolean onContextItemSelected(MenuItem item) {
+
+            AdapterView.AdapterContextMenuInfo info =
+                    (AdapterView.AdapterContextMenuInfo)
+                            item.getMenuInfo();
+
+            posicaoSelecionada = info.position;
+
+            int id = item.getItemId();
+
+            if (id == R.id.menuItemEditar) {
+                editarCertificacao();
+                return true;
+            }
+
+            if (id == R.id.menuItemExcluir) {
+                excluirCertificacao();
+                return true;
+            }
+
+            return super.onContextItemSelected(item);
+        }
+
+        private void editarCertificacao() {
+
+            if (posicaoSelecionada >= 0
+                    && posicaoSelecionada < certificacoes.size()) {
+
+                Certificacao certificacao =
+                        certificacoes.get(posicaoSelecionada);
+
+                Intent intent =
+                        new Intent(
+                                CertificacoesActivity.this,
+                                MainActivity.class
+                        );
+
+                intent.putExtra(
+                        "modoEdicao",
+                        true
                 );
 
-        listViewCertificacoes.setAdapter(adapter);
+                intent.putExtra(
+                        "id",
+                        certificacao.getId()
+                );
 
-    }
+                intent.putExtra(
+                        "nome",
+                        certificacao.getNome()
+                );
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu,View view,ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu,view,menuInfo);
-        getMenuInflater().inflate(R.menu.menu_certificacoes_item_selecionado,menu);
-        menu.setHeaderTitle("Opções da certificação");
-    }
+                intent.putExtra(
+                        "instituicao",
+                        certificacao.getInstituicao()
+                );
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
+                intent.putExtra(
+                        "area",
+                        certificacao.getArea()
+                );
 
-        AdapterView.AdapterContextMenuInfo info =
-                (AdapterView.AdapterContextMenuInfo)
-                        item.getMenuInfo();
+                intent.putExtra(
+                        "situacao",
+                        certificacao.getSituacao()
+                );
 
-        posicaoSelecionada = info.position;
+                intent.putExtra(
+                        "posicao",
+                        posicaoSelecionada
+                );
 
-        int id = item.getItemId();
+                startActivityForResult(
+                        intent,
+                        REQUEST_CADASTRO
+                );
+            }
+        }
 
-        if (id == R.id.menuItemEditar) {
-            editarCertificacao();
+        private void excluirCertificacao() {
+
+            if (posicaoSelecionada >= 0
+                    && posicaoSelecionada < certificacoes.size()) {
+
+                Certificacao certificacao =
+                        certificacoes.get(posicaoSelecionada);
+
+                String nome =
+                        certificacao.getNome();
+
+                certificacoes.remove(posicaoSelecionada);
+
+                adapter.notifyDataSetChanged();
+
+                Toast.makeText(
+                        this,
+                        "Certificação excluída: " + nome,
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        }
+
+        //Menu
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.menu_certificacoes,menu);
             return true;
         }
 
-        if (id == R.id.menuItemExcluir) {
-            excluirCertificacao();
-            return true;
+        //Cliques do adcionar e do Sohre
+        @Override
+        public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+            int id = item.getItemId();
+
+            if (id == R.id.menuItemAdicionar) {
+                abrirNovoCadastro();
+                return true;
+            }
+
+            if (id == R.id.menuItemSobre) {
+                abrirSobre();
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
         }
 
-        return super.onContextItemSelected(item);
-    }
+        private void abrirSobre() {
+            Intent intent =
+                    new Intent(
+                            CertificacoesActivity.this,
+                            SobreActivity.class
+                    );
 
-    private void editarCertificacao() {
+            startActivity(intent);
+        }
 
-        if (posicaoSelecionada >= 0
-                && posicaoSelecionada < certificacoes.size()) {
-
-            Certificacao certificacao =
-                    certificacoes.get(posicaoSelecionada);
+        private void abrirNovoCadastro() {
 
             Intent intent =
                     new Intent(
@@ -92,171 +201,100 @@ public class CertificacoesActivity extends AppCompatActivity {
                             MainActivity.class
                     );
 
-            intent.putExtra(
-                    "modoEdicao",
-                    true
-            );
-
-            intent.putExtra(
-                    "id",
-                    certificacao.getId()
-            );
-
-            intent.putExtra(
-                    "nome",
-                    certificacao.getNome()
-            );
-
-            intent.putExtra(
-                    "instituicao",
-                    certificacao.getInstituicao()
-            );
-
-            intent.putExtra(
-                    "area",
-                    certificacao.getArea()
-            );
-
-            intent.putExtra(
-                    "situacao",
-                    certificacao.getSituacao()
-            );
-
-            intent.putExtra(
-                    "posicao",
-                    posicaoSelecionada
-            );
-
             startActivityForResult(
                     intent,
                     REQUEST_CADASTRO
             );
         }
-    }
 
-    private void excluirCertificacao() {
+        @Override
+        protected void onActivityResult(
+                int requestCode,
+                int resultCode,
+                Intent data) {
 
-        if (posicaoSelecionada >= 0
-                && posicaoSelecionada < certificacoes.size()) {
+            super.onActivityResult(
+                    requestCode,
+                    resultCode,
+                    data
+            );
 
-            Certificacao certificacao =
-                    certificacoes.get(posicaoSelecionada);
+            if (requestCode == REQUEST_CADASTRO //resultado veio da tela de cadastro que eu abri?
+                    && resultCode == RESULT_OK //cadastro terminou com sucesso?
+                    && data != null) { //Existe inten?
 
-            String nome =
-                    certificacao.getNome();
+                String nome =
+                        data.getStringExtra("nome");
 
-            certificacoes.remove(posicaoSelecionada);
+                String instituicao =
+                        data.getStringExtra("instituicao");
 
-            adapter.notifyDataSetChanged();
+                String area =
+                        data.getStringExtra("area");
 
-            Toast.makeText(
-                    this,
-                    "Certificação excluída: " + nome,
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
-    }
+                String situacao =
+                        data.getStringExtra("situacao");
 
-    //Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_certificacoes,menu);
-        return true;
-    }
+                boolean modoEdicao =
+                        data.getBooleanExtra(
+                                "modoEdicao",
+                                false
+                        );
 
-    //Cliques do adcionar e do Sohre
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+                if (modoEdicao) {
 
-        int id = item.getItemId();
+                    int posicao =
+                            data.getIntExtra(
+                                    "posicao",
+                                    -1
+                            );
 
-        if (id == R.id.menuItemAdicionar) {
-            abrirNovoCadastro();
-            return true;
-        }
+                    if (posicao >= 0
+                            && posicao < certificacoes.size()) {
 
-        if (id == R.id.menuItemSobre) {
-            abrirSobre();
-            return true;
-        }
+                        Certificacao certificacao =
+                                certificacoes.get(posicao);
 
-        return super.onOptionsItemSelected(item);
-    }
+                        certificacao.setNome(nome);
+                        certificacao.setInstituicao(instituicao);
+                        certificacao.setArea(area);
+                        certificacao.setSituacao(situacao);
 
-    private void abrirSobre() {
-        Intent intent =
-                new Intent(
-                        CertificacoesActivity.this,
-                        SobreActivity.class
-                );
+                        adapter.notifyDataSetChanged();
 
-        startActivity(intent);
-    }
+                        Toast.makeText(
+                                this,
+                                "Certificação alterada com sucesso.",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
 
-    private void abrirNovoCadastro() {
+                } else {
 
-        Intent intent =
-                new Intent(
-                        CertificacoesActivity.this,
-                        MainActivity.class
-                );
+                    int novoId =
+                            certificacoes.size() + 1;
 
-        startActivityForResult(
-                intent,
-                REQUEST_CADASTRO
-        );
-    }
+                    Certificacao novaCertificacao =
+                            new Certificacao(
+                                    novoId,
+                                    nome,
+                                    instituicao,
+                                    area,
+                                    situacao
+                            );
 
-    @Override
-    protected void onActivityResult(
-            int requestCode,
-            int resultCode,
-            Intent data) {
-
-        super.onActivityResult(
-                requestCode,
-                resultCode,
-                data
-        );
-
-        if (requestCode == REQUEST_CADASTRO //resultado veio da tela de cadastro que eu abri?
-                && resultCode == RESULT_OK //cadastro terminou com sucesso?
-                && data != null) { //Existe inten?
-
-            String nome =
-                    data.getStringExtra("nome");
-
-            String instituicao =
-                    data.getStringExtra("instituicao");
-
-            String area =
-                    data.getStringExtra("area");
-
-            String situacao =
-                    data.getStringExtra("situacao");
-
-            int novoId =
-                    certificacoes.size() + 1;
-
-            Certificacao novaCertificacao =
-                    new Certificacao(
-                            novoId,
-                            nome,
-                            instituicao,
-                            area,
-                            situacao
+                    certificacoes.add(
+                            novaCertificacao
                     );
 
-            certificacoes.add(novaCertificacao);
+                    adapter.notifyDataSetChanged();
 
-            adapter.notifyDataSetChanged(); //Adapter redesenha pois os dados da lista mudaram
-
-            Toast.makeText(
-                    this,
-                    "Certificação adicionada: " + nome,
-                    Toast.LENGTH_SHORT
-            ).show();
+                    Toast.makeText(
+                            this,
+                            "Certificação adicionada: " + nome,
+                            Toast.LENGTH_SHORT
+                    ).show();
+                }
+            }
         }
     }
-
-}

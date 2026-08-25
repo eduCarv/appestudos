@@ -1,200 +1,295 @@
-package br.github.educarv.appestudos;
+    package br.github.educarv.appestudos;
 
-import android.content.Intent;
-import android.os.Bundle;
+    import android.content.Intent;
+    import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
-import android.widget.Toast;
+    import androidx.appcompat.app.AppCompatActivity;
+    import androidx.core.graphics.Insets;
+    import androidx.core.view.ViewCompat;
+    import androidx.core.view.WindowInsetsCompat;
+    import android.widget.ArrayAdapter;
+    import android.widget.Button;
+    import android.widget.CheckBox;
+    import android.widget.EditText;
+    import android.widget.RadioButton;
+    import android.widget.RadioGroup;
+    import android.widget.Spinner;
+    import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+    public class MainActivity extends AppCompatActivity {
 
-    private EditText editTextNome;
-    private EditText editTextInstituicao;
-    private Spinner spinnerArea;
-    private RadioGroup radioGroupSituacao;
-    private CheckBox checkBoxProvaAgendada;
-    private Button buttonLimpar;
-    private Button buttonSalvar;
+        private EditText editTextNome;
+        private EditText editTextInstituicao;
+        private Spinner spinnerArea;
+        private RadioGroup radioGroupSituacao;
+        private CheckBox checkBoxProvaAgendada;
+        private Button buttonLimpar;
+        private Button buttonSalvar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        private boolean modoEdicao = false;
+        private int idEdicao = -1;
+        private int posicaoEdicao = -1;
+        private RadioButton radioButtonPlanejada;
+        private RadioButton radioButtonAndamento;
+        private RadioButton radioButtonConcluida;
 
-        configurarBarrasDoSistema();
-        inicializarComponentes();
-        configurarSpinner();
-        configurarBotoes();
-    }
 
-    private void configurarBarrasDoSistema() {
-        ViewCompat.setOnApplyWindowInsetsListener(
-                findViewById(R.id.main),
-                (view, windowInsets) -> {
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
 
-                    Insets barrasSistema = windowInsets.getInsets(
-                            WindowInsetsCompat.Type.systemBars()
+            configurarBarrasDoSistema();
+            inicializarComponentes();
+            configurarSpinner();
+            configurarBotoes();
+            verificarModoEdicao();
+        }
+
+        private void verificarModoEdicao() {
+
+            Intent intent = getIntent();
+
+            modoEdicao =
+                    intent.getBooleanExtra(
+                            "modoEdicao",
+                            false
                     );
 
-                    view.setPadding(
-                            barrasSistema.left,
-                            barrasSistema.top,
-                            barrasSistema.right,
-                            barrasSistema.bottom
-                    );
+            if (modoEdicao) {
 
-                    return windowInsets;
+                idEdicao =
+                        intent.getIntExtra(
+                                "id",
+                                -1
+                        );
+
+                posicaoEdicao =
+                        intent.getIntExtra(
+                                "posicao",
+                                -1
+                        );
+
+                String nome =
+                        intent.getStringExtra("nome");
+
+                String instituicao =
+                        intent.getStringExtra("instituicao");
+
+                String area =
+                        intent.getStringExtra("area");
+
+                String situacao =
+                        intent.getStringExtra("situacao");
+
+                editTextNome.setText(nome);
+                editTextInstituicao.setText(instituicao);
+
+                selecionarArea(area);
+
+                selecionarSituacao(situacao);
+
+                setTitle("Editar Certificação");
+            }
+        }
+
+        private void selecionarArea(String area) {
+
+            for (int i = 0; i < spinnerArea.getCount(); i++) {
+
+                String item =
+                        spinnerArea.getItemAtPosition(i)
+                                .toString();
+
+                if (item.equals(area)) {
+
+                    spinnerArea.setSelection(i);
+
+                    break;
                 }
-        );
-    }
+            }
+        }
 
-    private void inicializarComponentes() {
-        editTextNome = findViewById(R.id.editTextNome);
-        editTextInstituicao = findViewById(R.id.editTextInstituicao);
-        spinnerArea = findViewById(R.id.spinnerArea);
-        radioGroupSituacao = findViewById(R.id.radioGroupSituacao);
-        checkBoxProvaAgendada = findViewById(R.id.checkBoxProvaAgendada);
-        buttonLimpar = findViewById(R.id.buttonLimpar);
-        buttonSalvar = findViewById(R.id.buttonSalvar);
-    }
+        private void selecionarSituacao(String situacao) {
 
-    private void configurarSpinner() {
-        String[] areasConhecimento = {
-                "Selecione uma área",
-                "Desenvolvimento de Software",
-                "Banco de Dados",
-                "Computação em Nuvem",
-                "Segurança da Informação",
-                "Gestão de Projetos",
-                "Redes de Computadores",
-                "System Design"
-        };
+            if (situacao.equals("Planejada")) {
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                areasConhecimento
-        );
+                radioButtonPlanejada.setChecked(true);
 
-        adapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
-        );
+            } else if (situacao.equals("Em andamento")) {
 
-        spinnerArea.setAdapter(adapter);
-    }
+                radioButtonAndamento.setChecked(true);
 
-    private void configurarBotoes() {
-        buttonLimpar.setOnClickListener(view -> limparFormulario());
-        buttonSalvar.setOnClickListener(view -> salvarCertificacao());
-    }
+            } else if (situacao.equals("Concluída")) {
 
-    private void limparFormulario() {
-        editTextNome.setText("");
-        editTextInstituicao.setText("");
+                radioButtonConcluida.setChecked(true);
+            }
+        }
 
-        spinnerArea.setSelection(0);
+        private void configurarBarrasDoSistema() {
+            ViewCompat.setOnApplyWindowInsetsListener(
+                    findViewById(R.id.main),
+                    (view, windowInsets) -> {
 
-        radioGroupSituacao.clearCheck();
+                        Insets barrasSistema = windowInsets.getInsets(
+                                WindowInsetsCompat.Type.systemBars()
+                        );
 
-        checkBoxProvaAgendada.setChecked(false);
+                        view.setPadding(
+                                barrasSistema.left,
+                                barrasSistema.top,
+                                barrasSistema.right,
+                                barrasSistema.bottom
+                        );
 
-        editTextNome.requestFocus(); //Foca o campo do nome, redireciona o cursor
+                        return windowInsets;
+                    }
+            );
+        }
 
-        Toast.makeText(
-                this,
-                "Formulário limpo com sucesso.",
-                Toast.LENGTH_SHORT
-        ).show();
-    }
+        private void inicializarComponentes() {
+            editTextNome = findViewById(R.id.editTextNome);
+            editTextInstituicao = findViewById(R.id.editTextInstituicao);
+            spinnerArea = findViewById(R.id.spinnerArea);
+            radioGroupSituacao = findViewById(R.id.radioGroupSituacao);
+            checkBoxProvaAgendada = findViewById(R.id.checkBoxProvaAgendada);
+            buttonLimpar = findViewById(R.id.buttonLimpar);
+            buttonSalvar = findViewById(R.id.buttonSalvar);
+            radioButtonPlanejada = findViewById(R.id.radioButtonPlanejada);
+            radioButtonAndamento = findViewById(R.id.radioButtonAndamento);
+            radioButtonConcluida = findViewById(R.id.radioButtonConcluida);
+        }
 
-    private void salvarCertificacao() {
-        String nome = editTextNome.getText().toString().trim();
-        String instituicao = editTextInstituicao.getText().toString().trim();
+        private void configurarSpinner() {
+            String[] areasConhecimento = {
+                    "Selecione uma área",
+                    "Desenvolvimento de Software",
+                    "Banco de Dados",
+                    "Computação em Nuvem",
+                    "Segurança da Informação",
+                    "Gestão de Projetos",
+                    "Redes de Computadores",
+                    "System Design"
+            };
 
-        if (nome.isEmpty()) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                    this,
+                    android.R.layout.simple_spinner_item,
+                    areasConhecimento
+            );
+
+            adapter.setDropDownViewResource(
+                    android.R.layout.simple_spinner_dropdown_item
+            );
+
+            spinnerArea.setAdapter(adapter);
+        }
+
+        private void configurarBotoes() {
+            buttonLimpar.setOnClickListener(view -> limparFormulario());
+            buttonSalvar.setOnClickListener(view -> salvarCertificacao());
+        }
+
+        private void limparFormulario() {
+            editTextNome.setText("");
+            editTextInstituicao.setText("");
+
+            spinnerArea.setSelection(0);
+
+            radioGroupSituacao.clearCheck();
+
+            checkBoxProvaAgendada.setChecked(false);
+
+            editTextNome.requestFocus(); //Foca o campo do nome, redireciona o cursor
+
             Toast.makeText(
                     this,
-                    "Informe o nome da certificação.",
+                    "Formulário limpo com sucesso.",
                     Toast.LENGTH_SHORT
             ).show();
-
-            editTextNome.requestFocus();
-            return;
         }
 
-        if (instituicao.isEmpty()) {
-            Toast.makeText(
-                    this,
-                    "Informe a instituição responsável.",
-                    Toast.LENGTH_SHORT
-            ).show();
+        private void salvarCertificacao() {
+            String nome = editTextNome.getText().toString().trim();
+            String instituicao = editTextInstituicao.getText().toString().trim();
 
-            editTextInstituicao.requestFocus();
-            return;
+            if (nome.isEmpty()) {
+                Toast.makeText(
+                        this,
+                        "Informe o nome da certificação.",
+                        Toast.LENGTH_SHORT
+                ).show();
+
+                editTextNome.requestFocus();
+                return;
+            }
+
+            if (instituicao.isEmpty()) {
+                Toast.makeText(
+                        this,
+                        "Informe a instituição responsável.",
+                        Toast.LENGTH_SHORT
+                ).show();
+
+                editTextInstituicao.requestFocus();
+                return;
+            }
+
+            if (spinnerArea.getSelectedItemPosition() == 0) {
+                Toast.makeText(
+                        this,
+                        "Selecione uma área de conhecimento.",
+                        Toast.LENGTH_SHORT
+                ).show();
+
+                spinnerArea.requestFocus();
+                return;
+            }
+
+            int radioButtonSelecionadoId =
+                    radioGroupSituacao.getCheckedRadioButtonId();
+
+            if (radioButtonSelecionadoId == -1) {
+                Toast.makeText(
+                        this,
+                        "Selecione a situação da certificação.",
+                        Toast.LENGTH_SHORT
+                ).show();
+
+                radioGroupSituacao.requestFocus();
+                return;
+            }
+
+            RadioButton radioButtonSelecionado =
+                    findViewById(radioButtonSelecionadoId);
+
+            String areaSelecionada =
+                    spinnerArea.getSelectedItem().toString();
+
+            String situacaoSelecionada =
+                    radioButtonSelecionado.getText().toString();
+
+            String provaAgendada;
+
+            if (checkBoxProvaAgendada.isChecked()) {
+                provaAgendada = "Sim";
+            } else {
+                provaAgendada = "Não";
+            }
+
+            Intent intentResultado = new Intent();
+
+            intentResultado.putExtra("nome", nome);
+            intentResultado.putExtra("instituicao", instituicao);
+            intentResultado.putExtra("area", areaSelecionada);
+            intentResultado.putExtra("situacao", situacaoSelecionada);
+            intentResultado.putExtra("prova", provaAgendada);
+            intentResultado.putExtra("modoEdicao",modoEdicao);
+            intentResultado.putExtra("id",idEdicao);
+            intentResultado.putExtra("posicao",posicaoEdicao);
+
+            setResult(RESULT_OK, intentResultado);
+
+            finish();
         }
-
-        if (spinnerArea.getSelectedItemPosition() == 0) {
-            Toast.makeText(
-                    this,
-                    "Selecione uma área de conhecimento.",
-                    Toast.LENGTH_SHORT
-            ).show();
-
-            spinnerArea.requestFocus();
-            return;
-        }
-
-        int radioButtonSelecionadoId =
-                radioGroupSituacao.getCheckedRadioButtonId();
-
-        if (radioButtonSelecionadoId == -1) {
-            Toast.makeText(
-                    this,
-                    "Selecione a situação da certificação.",
-                    Toast.LENGTH_SHORT
-            ).show();
-
-            radioGroupSituacao.requestFocus();
-            return;
-        }
-
-        RadioButton radioButtonSelecionado =
-                findViewById(radioButtonSelecionadoId);
-
-        String areaSelecionada =
-                spinnerArea.getSelectedItem().toString();
-
-        String situacaoSelecionada =
-                radioButtonSelecionado.getText().toString();
-
-        String provaAgendada;
-
-        if (checkBoxProvaAgendada.isChecked()) {
-            provaAgendada = "Sim";
-        } else {
-            provaAgendada = "Não";
-        }
-
-        Intent intentResultado = new Intent();
-
-        intentResultado.putExtra("nome", nome);
-        intentResultado.putExtra("instituicao", instituicao);
-        intentResultado.putExtra("area", areaSelecionada);
-        intentResultado.putExtra("situacao", situacaoSelecionada);
-        intentResultado.putExtra("prova", provaAgendada);
-
-        setResult(RESULT_OK, intentResultado);
-
-        finish();
     }
-}
