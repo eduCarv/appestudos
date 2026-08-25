@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppEstudos</string>
+    <string name="app_name">Controle de Estudos</string>
 
     <string name="titulo_cadastro">Cadastro de Certificação</string>
     <string name="subtitulo_cadastro">Registre uma certificação que deseja estudar</string>
