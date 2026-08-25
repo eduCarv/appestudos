@@ -21,9 +21,8 @@
 
     <string name="possui_prova">Possui prova agendada</string>
 
-    <string name="botao_limpar">Limpar</string>
-    <string name="botao_salvar">Salvar</string>
-
+    <string name="menu_limpar">Limpar</string>
+    <string name="menu_salvar">Salvar</string>
     <string name="menu_adicionar">Adicionar</string>
     <string name="menu_sobre">Sobre</string>
     <string name="menu_editar">Editar</string>

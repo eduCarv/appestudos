@@ -7,6 +7,9 @@
     import androidx.core.graphics.Insets;
     import androidx.core.view.ViewCompat;
     import androidx.core.view.WindowInsetsCompat;
+
+    import android.view.Menu;
+    import android.view.MenuItem;
     import android.widget.ArrayAdapter;
     import android.widget.Button;
     import android.widget.CheckBox;
@@ -40,6 +43,45 @@
             inicializarComponentes();
             configurarSpinner();
             verificarModoEdicao();
+
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
+
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.menu_cadastro,menu);
+            return true;
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+
+            int id = item.getItemId();
+
+            if (id == android.R.id.home) {
+
+                finish();
+
+                return true;
+            }
+
+            if (id == R.id.menuSalvar) {
+
+                salvarCertificacao();
+
+                return true;
+            }
+
+            if (id == R.id.menuLimpar) {
+
+                limparFormulario();
+
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
         }
 
         private void verificarModoEdicao() {
