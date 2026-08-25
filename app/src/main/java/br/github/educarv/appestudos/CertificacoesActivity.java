@@ -123,6 +123,11 @@
                 );
 
                 intent.putExtra(
+                        "provaAgendada",
+                        certificacao.isProvaAgendada()
+                );
+
+                intent.putExtra(
                         "posicao",
                         posicaoSelecionada
                 );
@@ -235,6 +240,9 @@
                 String situacao =
                         data.getStringExtra("situacao");
 
+                boolean provaAgendada =
+                        data.getBooleanExtra("provaAgendada",false);
+
                 boolean modoEdicao =
                         data.getBooleanExtra(
                                 "modoEdicao",
@@ -259,6 +267,7 @@
                         certificacao.setInstituicao(instituicao);
                         certificacao.setArea(area);
                         certificacao.setSituacao(situacao);
+                        certificacao.setProvaAgendada(provaAgendada);
 
                         adapter.notifyDataSetChanged();
 
@@ -280,7 +289,8 @@
                                     nome,
                                     instituicao,
                                     area,
-                                    situacao
+                                    situacao,
+                                    provaAgendada
                             );
 
                     certificacoes.add(

@@ -7,15 +7,17 @@ public class Certificacao {
     private String instituicao;
     private String area;
     private String situacao;
+    private boolean provaAgendada;
 
     public Certificacao(int id, String nome, String instituicao,
-                        String area, String situacao) {
+                        String area, String situacao, boolean provaAgendada) {
 
         this.id = id;
         this.nome = nome;
         this.instituicao = instituicao;
         this.area = area;
         this.situacao = situacao;
+        this.provaAgendada = provaAgendada;
     }
 
     public int getId() {
@@ -32,6 +34,10 @@ public class Certificacao {
 
     public String getArea() {
         return area;
+    }
+
+    public boolean isProvaAgendada() {
+        return provaAgendada;
     }
 
     public String getSituacao() {
@@ -52,5 +58,9 @@ public class Certificacao {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public void setProvaAgendada(boolean provaAgendada) {
+        this.provaAgendada = provaAgendada;
     }
 }

@@ -120,12 +120,17 @@
                 String situacao =
                         intent.getStringExtra("situacao");
 
+                boolean provaAgendada =
+                        intent.getBooleanExtra("provaAgendada",false);
+
                 editTextNome.setText(nome);
                 editTextInstituicao.setText(instituicao);
 
                 selecionarArea(area);
 
                 selecionarSituacao(situacao);
+
+                checkBoxProvaAgendada.setChecked(provaAgendada);
 
                 setTitle("Editar Certificação");
             }
@@ -300,13 +305,8 @@
             String situacaoSelecionada =
                     radioButtonSelecionado.getText().toString();
 
-            String provaAgendada;
-
-            if (checkBoxProvaAgendada.isChecked()) {
-                provaAgendada = "Sim";
-            } else {
-                provaAgendada = "Não";
-            }
+            boolean provaAgendada =
+                    checkBoxProvaAgendada.isChecked();
 
             Intent intentResultado = new Intent();
 
@@ -314,7 +314,7 @@
             intentResultado.putExtra("instituicao", instituicao);
             intentResultado.putExtra("area", areaSelecionada);
             intentResultado.putExtra("situacao", situacaoSelecionada);
-            intentResultado.putExtra("prova", provaAgendada);
+            intentResultado.putExtra("provaAgendada", provaAgendada);
             intentResultado.putExtra("modoEdicao",modoEdicao);
             intentResultado.putExtra("id",idEdicao);
             intentResultado.putExtra("posicao",posicaoEdicao);

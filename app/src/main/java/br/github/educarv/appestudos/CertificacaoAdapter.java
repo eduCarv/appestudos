@@ -55,6 +55,9 @@ public class CertificacaoAdapter extends ArrayAdapter<Certificacao> {
         TextView textViewSituacao =
                 convertView.findViewById(R.id.textViewSituacao);
 
+        TextView textViewProvaAgendada =
+                convertView.findViewById(R.id.textViewProvaAgendada);
+
         Certificacao certificacao =
                 certificacoes.get(position);
 
@@ -71,6 +74,16 @@ public class CertificacaoAdapter extends ArrayAdapter<Certificacao> {
         textViewSituacao.setText(
                 "Situação: " + certificacao.getSituacao()
         );
+
+        String prova =
+                certificacao.isProvaAgendada()
+                        ? "Sim"
+                        : "Não";
+
+        textViewProvaAgendada.setText(
+                "Prova agendada: " + prova
+        );
+
 
         return convertView;
     }
