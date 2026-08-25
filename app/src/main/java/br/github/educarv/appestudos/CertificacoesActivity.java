@@ -2,10 +2,13 @@ package br.github.educarv.appestudos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -92,49 +95,54 @@ public class CertificacoesActivity extends AppCompatActivity {
          */
     }
 
+    //Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_certificacoes,menu);
+        return true;
+    }
 
-    private void carregarCertificacoes() {
+    //Cliques do adcionar e do Sohre
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        certificacoes = new ArrayList<>();
+        int id = item.getItemId();
 
-        String[] ids =
-                getResources().getStringArray(
-                        R.array.certificacao_ids
-                );
-
-        String[] nomes =
-                getResources().getStringArray(
-                        R.array.certificacao_nomes
-                );
-
-        String[] instituicoes =
-                getResources().getStringArray(
-                        R.array.certificacao_instituicoes
-                );
-
-        String[] areas =
-                getResources().getStringArray(
-                        R.array.certificacao_areas
-                );
-
-        String[] situacoes =
-                getResources().getStringArray(
-                        R.array.certificacao_situacoes
-                );
-
-        for (int i = 0; i < nomes.length; i++) {
-
-            Certificacao certificacao =
-                    new Certificacao(
-                            Integer.parseInt(ids[i]),
-                            nomes[i],
-                            instituicoes[i],
-                            areas[i],
-                            situacoes[i]
-                    );
-
-            certificacoes.add(certificacao);
+        if (id == R.id.menuItemAdicionar) {
+            abrirNovoCadastro();
+            return true;
         }
+
+        if (id == R.id.menuItemSobre) {
+            abrirSobre();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void abrirSobre() {
+        Intent intent =
+                new Intent(
+                        CertificacoesActivity.this,
+                        SobreActivity.class
+                );
+
+        startActivity(intent);
+    }
+
+    private void abrirNovoCadastro() {
+
+        Intent intent =
+                new Intent(
+                        CertificacoesActivity.this,
+                        MainActivity.class
+                );
+
+        startActivityForResult(
+                intent,
+                REQUEST_CADASTRO
+        );
     }
 
     @Override
