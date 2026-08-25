@@ -2,9 +2,11 @@ package br.github.educarv.appestudos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,9 +20,7 @@ public class CertificacoesActivity extends AppCompatActivity {
     private ListView listViewCertificacoes;
 
     private ArrayList<Certificacao> certificacoes;
-
-   // private Button buttonAdicionar;
-   // private Button buttonSobre;
+    private int posicaoSelecionada = -1;
 
     private static final int REQUEST_CADASTRO = 1;
     private CertificacaoAdapter adapter;
@@ -33,8 +33,8 @@ public class CertificacoesActivity extends AppCompatActivity {
 
         listViewCertificacoes =
                 findViewById(R.id.listViewCertificacoes);
+        registerForContextMenu(listViewCertificacoes);
 
-        //carregarCertificacoes();
         certificacoes = new ArrayList<>();
 
         adapter =
@@ -45,26 +45,46 @@ public class CertificacoesActivity extends AppCompatActivity {
 
         listViewCertificacoes.setAdapter(adapter);
 
-        listViewCertificacoes.setOnItemClickListener(
-                (parent, view, position, id) -> {
+    }
 
-                    Certificacao certificacao =
-                            certificacoes.get(position);
+    @Override
+    public void onCreateContextMenu(ContextMenu menu,View view,ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu,view,menuInfo);
+        getMenuInflater().inflate(R.menu.menu_certificacoes_item_selecionado,menu);
+        menu.setHeaderTitle("Opções da certificação");
+    }
 
-                    Toast.makeText(
-                            this,
-                            "Certificação selecionada: "
-                                    + certificacao.getNome(),
-                            Toast.LENGTH_SHORT
-                    ).show();
-                }
-        );
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
 
-        /**
-        buttonAdicionar =
-                findViewById(R.id.buttonAdicionar);
+        AdapterView.AdapterContextMenuInfo info =
+                (AdapterView.AdapterContextMenuInfo)
+                        item.getMenuInfo();
 
-        buttonAdicionar.setOnClickListener(view -> {
+        posicaoSelecionada = info.position;
+
+        int id = item.getItemId();
+
+        if (id == R.id.menuItemEditar) {
+            editarCertificacao();
+            return true;
+        }
+
+        if (id == R.id.menuItemExcluir) {
+            excluirCertificacao();
+            return true;
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    private void editarCertificacao() {
+
+        if (posicaoSelecionada >= 0
+                && posicaoSelecionada < certificacoes.size()) {
+
+            Certificacao certificacao =
+                    certificacoes.get(posicaoSelecionada);
 
             Intent intent =
                     new Intent(
@@ -72,27 +92,69 @@ public class CertificacoesActivity extends AppCompatActivity {
                             MainActivity.class
                     );
 
+            intent.putExtra(
+                    "modoEdicao",
+                    true
+            );
+
+            intent.putExtra(
+                    "id",
+                    certificacao.getId()
+            );
+
+            intent.putExtra(
+                    "nome",
+                    certificacao.getNome()
+            );
+
+            intent.putExtra(
+                    "instituicao",
+                    certificacao.getInstituicao()
+            );
+
+            intent.putExtra(
+                    "area",
+                    certificacao.getArea()
+            );
+
+            intent.putExtra(
+                    "situacao",
+                    certificacao.getSituacao()
+            );
+
+            intent.putExtra(
+                    "posicao",
+                    posicaoSelecionada
+            );
+
             startActivityForResult(
                     intent,
                     REQUEST_CADASTRO
             );
-        });
+        }
+    }
 
-        buttonSobre =
-                findViewById(R.id.buttonSobre);
+    private void excluirCertificacao() {
 
-        buttonSobre.setOnClickListener(view -> {
-            //Cria uma açao de Sair da CertificacoesActiviti e abrir a SobreActiviti
-            Intent intent =
-                    new Intent(
-                            CertificacoesActivity.this,
-                            SobreActivity.class
-                    );
+        if (posicaoSelecionada >= 0
+                && posicaoSelecionada < certificacoes.size()) {
 
-            //executa a açao
-            startActivity(intent);
-        });
-         */
+            Certificacao certificacao =
+                    certificacoes.get(posicaoSelecionada);
+
+            String nome =
+                    certificacao.getNome();
+
+            certificacoes.remove(posicaoSelecionada);
+
+            adapter.notifyDataSetChanged();
+
+            Toast.makeText(
+                    this,
+                    "Certificação excluída: " + nome,
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
     }
 
     //Menu
