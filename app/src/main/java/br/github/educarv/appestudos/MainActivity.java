@@ -205,7 +205,7 @@
 
                 checkBoxProvaAgendada.setChecked(provaAgendada);
 
-                setTitle("Editar Certificação");
+                setTitle(R.string.titulo_edicao);
             }
         }
 
@@ -228,15 +228,15 @@
 
         private void selecionarSituacao(String situacao) {
 
-            if (situacao.equals("Planejada")) {
+            if (situacao.equals("Planejada") || situacao.equals("Planned")) {
 
                 radioButtonPlanejada.setChecked(true);
 
-            } else if (situacao.equals("Em andamento")) {
+            } else if (situacao.equals("Em andamento") || situacao.equals("In progress")) {
 
                 radioButtonAndamento.setChecked(true);
 
-            } else if (situacao.equals("Concluída")) {
+            } else if (situacao.equals("Concluída") || situacao.equals("Completed")) {
 
                 radioButtonConcluida.setChecked(true);
             }
@@ -275,15 +275,16 @@
         }
 
         private void configurarSpinner() {
+
             String[] areasConhecimento = {
-                    "Selecione uma área",
-                    "Desenvolvimento de Software",
-                    "Banco de Dados",
-                    "Computação em Nuvem",
-                    "Segurança da Informação",
-                    "Gestão de Projetos",
-                    "Redes de Computadores",
-                    "System Design"
+                    getString(R.string.selecione_area),
+                    getString(R.string.desenvolvimento_software),
+                    getString(R.string.banco_dados),
+                    getString(R.string.computacao_nuvem),
+                    getString(R.string.seguranca_informacao),
+                    getString(R.string.gestao_projetos),
+                    getString(R.string.redes_computadores),
+                    getString(R.string.system_design)
             };
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -313,7 +314,7 @@
 
             Toast.makeText(
                     this,
-                    "Formulário limpo com sucesso.",
+                    R.string.formulario_limpo,
                     Toast.LENGTH_SHORT
             ).show();
         }
@@ -323,9 +324,10 @@
             String instituicao = editTextInstituicao.getText().toString().trim();
 
             if (nome.isEmpty()) {
+
                 Toast.makeText(
                         this,
-                        "Informe o nome da certificação.",
+                        R.string.validacao_nome,
                         Toast.LENGTH_SHORT
                 ).show();
 
@@ -334,9 +336,10 @@
             }
 
             if (instituicao.isEmpty()) {
+
                 Toast.makeText(
                         this,
-                        "Informe a instituição responsável.",
+                        R.string.validacao_instituicao,
                         Toast.LENGTH_SHORT
                 ).show();
 
@@ -345,9 +348,10 @@
             }
 
             if (spinnerArea.getSelectedItemPosition() == 0) {
+
                 Toast.makeText(
                         this,
-                        "Selecione uma área de conhecimento.",
+                        R.string.validacao_area,
                         Toast.LENGTH_SHORT
                 ).show();
 
@@ -359,9 +363,10 @@
                     radioGroupSituacao.getCheckedRadioButtonId();
 
             if (radioButtonSelecionadoId == -1) {
+
                 Toast.makeText(
                         this,
-                        "Selecione a situação da certificação.",
+                        R.string.validacao_situacao,
                         Toast.LENGTH_SHORT
                 ).show();
 
@@ -430,7 +435,7 @@
             if (ultimaArea == null) {
 
                 selecionarArea(
-                        "Desenvolvimento de Software"
+                        getString(R.string.desenvolvimento_software)
                 );
 
             } else {

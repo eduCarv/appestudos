@@ -51,7 +51,7 @@
         public void onCreateContextMenu(ContextMenu menu,View view,ContextMenu.ContextMenuInfo menuInfo) {
             super.onCreateContextMenu(menu,view,menuInfo);
             getMenuInflater().inflate(R.menu.menu_certificacoes_item_selecionado,menu);
-            menu.setHeaderTitle("Opções da certificação");
+            menu.setHeaderTitle(R.string.opcoes_certificacao);
         }
 
         @Override
@@ -156,7 +156,7 @@
 
                 Toast.makeText(
                         this,
-                        "Certificação excluída: " + nome,
+                        R.string.exclusao_sucesso,
                         Toast.LENGTH_SHORT
                 ).show();
             }
@@ -273,7 +273,7 @@
 
                         Toast.makeText(
                                 this,
-                                "Certificação alterada com sucesso.",
+                                R.string.edicao_sucesso,
                                 Toast.LENGTH_SHORT
                         ).show();
                     }
@@ -301,7 +301,7 @@
 
                     Toast.makeText(
                             this,
-                            "Certificação adicionada: " + nome,
+                            R.string.cadastro_sucesso,
                             Toast.LENGTH_SHORT
                     ).show();
                 }

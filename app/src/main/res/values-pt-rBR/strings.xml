@@ -1,0 +1,82 @@
+<resources>
+
+    <string name="app_name">Controle de Estudos</string>
+
+    <!-- Títulos -->
+    <string name="titulo_lista">Controle de Certificações</string>
+    <string name="titulo_cadastro">Nova Certificação</string>
+    <string name="titulo_edicao">Editar Certificação</string>
+    <string name="titulo_sobre">Sobre</string>
+
+    <!-- Formulário -->
+    <string name="nome">Nome</string>
+    <string name="hint_nome">Certificacao Java</string>
+    <string name="instituicao">Instituição</string>
+    <string name="hint_instituicao">Oracle</string>
+    <string name="area">Área</string>
+    <string name="situacao">Situação</string>
+    <string name="prova_agendada">Possui prova agendada</string>
+
+    <!-- Situação -->
+    <string name="planejada">Planejada</string>
+    <string name="em_andamento">Em andamento</string>
+    <string name="concluida">Concluída</string>
+
+    <!-- Menus -->
+    <string name="adicionar">Adicionar</string>
+    <string name="salvar">Salvar</string>
+    <string name="limpar">Limpar</string>
+    <string name="sobre">Sobre</string>
+
+    <string name="sugerir_area">Sugerir Área</string>
+
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
+
+    <!-- Menu contextual -->
+    <string name="opcoes_certificacao">
+        Opções da certificação
+    </string>
+
+    <!-- Mensagens -->
+    <string name="cadastro_sucesso">
+        Certificação adicionada com sucesso.
+    </string>
+
+    <string name="edicao_sucesso">
+        Certificação alterada com sucesso.
+    </string>
+
+    <string name="exclusao_sucesso">
+        Certificação excluída com sucesso.
+    </string>
+
+    <string name="formulario_limpo">
+        Formulário limpo.
+    </string>
+
+    <string name="validacao_nome">Informe o nome da certificação.</string>
+    <string name="validacao_instituicao">Informe a instituição responsável.</string>
+    <string name="validacao_area">Selecione uma área de conhecimento.</string>
+    <string name="validacao_situacao">Selecione a situação da certificação.</string>
+
+    <!-- Lista -->
+    <string name="label_instituicao">Instituição: %1$s</string>
+    <string name="label_area">Área: %1$s</string>
+    <string name="label_situacao">Situação: %1$s</string>
+    <string name="label_prova">Prova agendada: %1$s</string>
+
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+
+    <!-- Areas do Options -->
+    <string name="selecione_area">Selecione uma área</string>
+    <string name="desenvolvimento_software">Desenvolvimento de Software</string>
+    <string name="banco_dados">Banco de Dados</string>
+    <string name="computacao_nuvem">Computação em Nuvem</string>
+    <string name="seguranca_informacao">Segurança da Informação</string>
+    <string name="gestao_projetos">Gestão de Projetos</string>
+    <string name="redes_computadores">Redes de Computadores</string>
+    <string name="system_design">System Design</string>
+
+</resources>

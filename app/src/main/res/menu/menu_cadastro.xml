@@ -5,19 +5,19 @@
 
     <item
         android:id="@+id/menuSalvar"
+        android:title="@string/salvar"
         android:icon="@drawable/ic_salvar"
-        android:title="@string/menu_salvar"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menuLimpar"
+        android:title="@string/limpar"
         android:icon="@drawable/ic_limpar"
-        android:title="@string/menu_limpar"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menuSugerirArea"
-        android:title="Sugerir Area"
+        android:title="@string/sugerir_area"
         android:checkable="true"
         />
 

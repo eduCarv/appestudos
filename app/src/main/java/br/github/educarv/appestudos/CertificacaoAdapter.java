@@ -64,24 +64,36 @@ public class CertificacaoAdapter extends ArrayAdapter<Certificacao> {
         textViewNome.setText(certificacao.getNome());
 
         textViewInstituicao.setText(
-                "Instituição: " + certificacao.getInstituicao()
+                getContext().getString(
+                        R.string.label_instituicao,
+                        certificacao.getInstituicao()
+                )
         );
 
         textViewArea.setText(
-                "Área: " + certificacao.getArea()
+                getContext().getString(
+                        R.string.label_area,
+                        certificacao.getArea()
+                )
         );
 
         textViewSituacao.setText(
-                "Situação: " + certificacao.getSituacao()
+                getContext().getString(
+                        R.string.label_situacao,
+                        certificacao.getSituacao()
+                )
         );
 
         String prova =
                 certificacao.isProvaAgendada()
-                        ? "Sim"
-                        : "Não";
+                        ? getContext().getString(R.string.sim)
+                        : getContext().getString(R.string.nao);
 
         textViewProvaAgendada.setText(
-                "Prova agendada: " + prova
+                getContext().getString(
+                        R.string.label_prova,
+                        prova
+                )
         );
 
 

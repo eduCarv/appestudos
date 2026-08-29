@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:labelFor="@id/editTextNome"
-            android:text="@string/label_nome"
+            android:text="@string/nome"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:labelFor="@id/editTextInstituicao"
-            android:text="@string/label_instituicao"
+            android:text="@string/instituicao"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:labelFor="@id/spinnerArea"
-            android:text="@string/label_area"
+            android:text="@string/area"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/label_situacao"
+            android:text="@string/situacao"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -98,21 +98,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:text="@string/situacao_planejada" />
+                android:text="@string/planejada" />
 
             <RadioButton
                 android:id="@+id/radioButtonAndamento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:text="@string/situacao_andamento" />
+                android:text="@string/em_andamento" />
 
             <RadioButton
                 android:id="@+id/radioButtonConcluida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:text="@string/situacao_concluida" />
+                android:text="@string/concluida" />
 
         </RadioGroup>
 
@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:minHeight="48dp"
-            android:text="@string/possui_prova" />
+            android:text="@string/prova_agendada" />
     </LinearLayout>
 
 </ScrollView>

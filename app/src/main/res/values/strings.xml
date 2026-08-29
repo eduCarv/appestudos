@@ -1,34 +1,82 @@
 <resources>
-    <string name="app_name">Controle de Estudos</string>
 
-    <string name="titulo_cadastro">Nova Certificação</string>
-    <string name="titulo_lista">Minhas Certificações</string>
-    <string name="titulo_sobre">Sobre</string>
-    <string name="subtitulo_cadastro">Registre uma certificação que deseja estudar</string>
+<string name="app_name">Study Control</string>
 
-    <string name="label_nome">Nome da certificação *</string>
-    <string name="hint_nome">Ex.: Oracle Java Foundations</string>
+<!-- Titles -->
+<string name="titulo_lista">Certification Control</string>
+<string name="titulo_cadastro">New Certification</string>
+<string name="titulo_edicao">Edit Certification</string>
+<string name="titulo_sobre">About</string>
 
-    <string name="label_instituicao">Instituição responsável *</string>
-    <string name="hint_instituicao">Ex.: Oracle</string>
+<!-- Form -->
+<string name="nome">Name</string>
+<string name="hint_nome">Java Certification</string>
+<string name="instituicao">Institution</string>
+<string name="hint_instituicao">Oracle</string>
+<string name="area">Area</string>
+<string name="situacao">Status</string>
+<string name="prova_agendada">Exam scheduled</string>
 
-    <string name="label_area">Área de conhecimento</string>
+<!-- Status -->
+<string name="planejada">Planned</string>
+<string name="em_andamento">In progress</string>
+<string name="concluida">Completed</string>
 
-    <string name="label_situacao">Situação da certificação *</string>
-    <string name="situacao_planejada">Planejada</string>
-    <string name="situacao_andamento">Em andamento</string>
-    <string name="situacao_concluida">Concluída</string>
+<!-- Menus -->
+<string name="adicionar">Add</string>
+<string name="salvar">Save</string>
+<string name="limpar">Clear</string>
+<string name="sobre">About</string>
 
-    <string name="possui_prova">Possui prova agendada</string>
+<string name="sugerir_area">Suggest Area</string>
 
-    <string name="menu_limpar">Limpar</string>
-    <string name="menu_salvar">Salvar</string>
-    <string name="menu_adicionar">Adicionar</string>
-    <string name="menu_sobre">Sobre</string>
-    <string name="menu_editar">Editar</string>
-    <string name="menu_excluir">Excluir</string>
-    <string name="sugerir_area">Sugerir Area</string>
+<string name="editar">Edit</string>
+<string name="excluir">Delete</string>
 
+<!-- Context menu -->
+<string name="opcoes_certificacao">
+        Certification options
+    </string>
+
+<!-- Messages -->
+<string name="cadastro_sucesso">
+        Certification added successfully.
+    </string>
+
+<string name="edicao_sucesso">
+        Certification updated successfully.
+    </string>
+
+<string name="exclusao_sucesso">
+        Certification deleted successfully.
+    </string>
+
+<string name="formulario_limpo">
+        Form cleared.
+    </string>
+
+<string name="validacao_nome">Enter the certification name.</string>
+<string name="validacao_instituicao">Enter the responsible institution.</string>
+<string name="validacao_area">Select a knowledge area.</string>
+<string name="validacao_situacao">Select the certification status.</string>
+
+<!-- List -->
+<string name="label_instituicao">Institution: %1$s</string>
+<string name="label_area">Area: %1$s</string>
+<string name="label_situacao">Status: %1$s</string>
+<string name="label_prova">Exam scheduled: %1$s</string>
+
+<string name="sim">Yes</string>
+<string name="nao">No</string>
+
+<!-- Spinner Areas-->>
+<string name="selecione_area">Select an area</string>
+<string name="desenvolvimento_software">Software Development</string>
+<string name="banco_dados">Database</string>
+<string name="computacao_nuvem">Cloud Computing</string>
+<string name="seguranca_informacao">Information Security</string>
+<string name="gestao_projetos">Project Management</string>
+<string name="redes_computadores">Computer Networks</string>
+<string name="system_design">System Design</string>
 
 </resources>
-
