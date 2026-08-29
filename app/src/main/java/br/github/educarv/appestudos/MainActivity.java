@@ -1,6 +1,8 @@
     package br.github.educarv.appestudos;
 
+    import android.content.Context;
     import android.content.Intent;
+    import android.content.SharedPreferences;
     import android.os.Bundle;
 
     import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +34,9 @@
         private RadioButton radioButtonPlanejada;
         private RadioButton radioButtonAndamento;
         private RadioButton radioButtonConcluida;
+        private static final String PREFS_NAME = "configuracoes";
+        private static final String PREF_SUGERIR_AREA = "sugerir_area";
+        private static final String PREF_ULTIMA_AREA = "ultima_area";
 
 
         @Override
@@ -51,7 +56,38 @@
 
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {
-            getMenuInflater().inflate(R.menu.menu_cadastro,menu);
+
+            getMenuInflater().inflate(
+                    R.menu.menu_cadastro,
+                    menu
+            );
+
+            SharedPreferences preferences =
+                    getSharedPreferences(
+                            PREFS_NAME,
+                            Context.MODE_PRIVATE
+                    );
+
+            boolean sugerirArea =
+                    preferences.getBoolean(
+                            PREF_SUGERIR_AREA,
+                            false
+                    );
+
+            MenuItem itemSugerirArea =
+                    menu.findItem(
+                            R.id.menuSugerirArea
+                    );
+
+            itemSugerirArea.setChecked(
+                    sugerirArea
+            );
+
+            if (sugerirArea && !modoEdicao) {
+
+                sugerirArea();
+            }
+
             return true;
         }
 
@@ -59,6 +95,43 @@
         public boolean onOptionsItemSelected(MenuItem item) {
 
             int id = item.getItemId();
+
+            if (id == R.id.menuSugerirArea) {
+
+                boolean marcado =
+                        !item.isChecked();
+
+                item.setChecked(
+                        marcado
+                );
+
+                SharedPreferences preferences =
+                        getSharedPreferences(
+                                PREFS_NAME,
+                                Context.MODE_PRIVATE
+                        );
+
+                SharedPreferences.Editor editor =
+                        preferences.edit();
+
+                editor.putBoolean(
+                        PREF_SUGERIR_AREA,
+                        marcado
+                );
+
+                editor.apply();
+
+                if (marcado) {
+
+                    sugerirArea();
+
+                } else {
+
+                    spinnerArea.setSelection(0);
+                }
+
+                return true;
+            }
 
             if (id == android.R.id.home) {
 
@@ -319,8 +392,52 @@
             intentResultado.putExtra("id",idEdicao);
             intentResultado.putExtra("posicao",posicaoEdicao);
 
+            SharedPreferences preferences =
+                    getSharedPreferences(
+                            PREFS_NAME,
+                            Context.MODE_PRIVATE
+                    );
+
+            SharedPreferences.Editor editor =
+                    preferences.edit();
+
+            editor.putString(
+                    PREF_ULTIMA_AREA,
+                    areaSelecionada
+            );
+
+            editor.apply();
+
             setResult(RESULT_OK, intentResultado);
 
             finish();
+        }
+
+        private void sugerirArea() {
+
+            SharedPreferences preferences =
+                    getSharedPreferences(
+                            PREFS_NAME,
+                            Context.MODE_PRIVATE
+                    );
+
+            String ultimaArea =
+                    preferences.getString(
+                            PREF_ULTIMA_AREA,
+                            null
+                    );
+
+            if (ultimaArea == null) {
+
+                selecionarArea(
+                        "Desenvolvimento de Software"
+                );
+
+            } else {
+
+                selecionarArea(
+                        ultimaArea
+                );
+            }
         }
     }
