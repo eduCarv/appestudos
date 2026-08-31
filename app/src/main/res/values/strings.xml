@@ -78,5 +78,10 @@
 <string name="gestao_projetos">Project Management</string>
 <string name="redes_computadores">Computer Networks</string>
 <string name="system_design">System Design</string>
+    <string name="nome_faculdade">Federal University of Technology – Paraná</string>
+    <string name="proposito_app">Certification Study Tracker</string>
+    <string name="descricao_app">Application for organizing and personally tracking studies for courses and professional certifications.</string>
+    <string name="nome_autor">Author</string>
+    <string name="curso_especializacao">Course: Java Specialization</string>
 
 </resources>

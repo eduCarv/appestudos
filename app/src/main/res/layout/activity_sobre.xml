@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Universidade Tecnológica Federal do Paraná"
+            android:text="@string/nome_faculdade"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:gravity="center"
-            android:text="Controle de estudos para certificaçoes"
+            android:text="@string/proposito_app"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -44,14 +44,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Aplicativo para organização e acompanhamento pessoal de estudos voltados para cursos e certificações profissionais."
+            android:text="@string/descricao_app"
             android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Autor"
+            android:text="@string/nome_autor"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -66,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Curso: Especialização em Java"
+            android:text="@string/curso_especializacao"
             android:textSize="16sp" />
 
         <TextView

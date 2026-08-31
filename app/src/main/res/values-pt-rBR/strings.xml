@@ -78,5 +78,10 @@
     <string name="gestao_projetos">Gestão de Projetos</string>
     <string name="redes_computadores">Redes de Computadores</string>
     <string name="system_design">System Design</string>
+    <string name="nome_faculdade">Universidade Tecnológica Federal do Paraná</string>
+    <string name="proposito_app">Controle de estudos para certificaçoes</string>
+    <string name="descricao_app">Aplicativo para organização e acompanhamento pessoal de estudos voltados para cursos e certificações profissionais.</string>
+    <string name="nome_autor">Autor</string>
+    <string name="curso_especializacao">Curso: Especialização em Java</string>
 
 </resources>
